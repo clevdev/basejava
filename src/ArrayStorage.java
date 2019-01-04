@@ -8,13 +8,13 @@ public class ArrayStorage {
     private int size = 0;
 
     void clear() {
-        Arrays.fill(storage, null);
+        Arrays.fill(storage, 0, size - 1, null);
         size = 0;
     }
 
     void save(Resume r) {
-        if(get(r.uuid) == null) {
-            if(size < storage.length){
+        if (get(r.uuid) == null) {
+            if (size < storage.length) {
                 storage[size] = r;
                 size++;
             }
@@ -22,12 +22,10 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        if(size!=0){
 
-            for( int i=0; i<= (size-1); i++){
-                if (storage[i].uuid.equals(uuid)){
-                    return storage[i];
-                }
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)) {
+                return storage[i];
             }
         }
 
@@ -35,18 +33,16 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        if(size!=0) {
-            for (int i = 0; i < (size-1); i++) {
-                if (storage[i].uuid.equals(uuid)) {
-                    if (i != (size - 1)){
-                        System.arraycopy(storage, i + 1, storage, i, size - i);
-                    }
-                    storage[size-1]= null;
-                    size--;
 
-                }
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)) {
+                System.arraycopy(storage, i + 1, storage, i, size - i);
+                storage[size - 1] = null;
+                size--;
+
             }
         }
+
     }
 
     /**
@@ -54,10 +50,10 @@ public class ArrayStorage {
      */
     Resume[] getAll() {
 
-        if(size>0){
-            Resume rArr[] = new Resume[size];
-            System.arraycopy(storage,0, rArr, 0, size );
-            return rArr;
+        if (size > 0) {
+            Resume resume[] = new Resume[size];
+            System.arraycopy(storage, 0, resume, 0, size);
+            return resume;
         }
 
         return new Resume[0];
