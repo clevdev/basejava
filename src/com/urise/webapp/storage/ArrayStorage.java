@@ -22,7 +22,6 @@ public class ArrayStorage {
                 System.out.println("ERROR: Не возможно сохранить новый элемент. Переполнение");
             }
         } else {
-
             System.out.println("ERROR: Resume c uuid=" + resume.getUuid() + " уже существует");
         }
 
@@ -54,7 +53,6 @@ public class ArrayStorage {
             size--;
         }
         System.out.println("ERROR: Удаление не выполнено. Resume c uuid=" + uuid + " не существует");
-
     }
 
     public Resume[] getAll() {
