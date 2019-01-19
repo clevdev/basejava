@@ -3,7 +3,7 @@ package com.urise.webapp.model;
 /**
  * Initial resume class
  */
-public class Resume {
+public class Resume implements Comparable<Resume>{
 
 
     // Unique identifier
@@ -18,7 +18,25 @@ public class Resume {
     }
 
     @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Resume resume = (Resume) object;
+        return uuid.equals(resume.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
+    }
+
+    @Override
     public String toString() {
         return uuid;
+    }
+
+    @Override
+    public int compareTo(Resume resume) {
+        return uuid.compareTo(resume.uuid);
     }
 }
