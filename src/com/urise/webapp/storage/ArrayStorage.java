@@ -13,11 +13,11 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     public void save(Resume resume) {
         if (getIndex(resume.getUuid()) == NOT_FOUND) {
-            if (size < storage.length) {
+            if (size < STORAGE_LIMIT) {
                 storage[size] = resume;
                 size++;
             } else {
-                System.out.println("ERROR: Overflow");
+                System.out.println("ERROR: Storage overflow");
             }
         } else {
             System.out.println("ERROR: Resume uuid=" + resume.getUuid() + " already exist");
@@ -32,15 +32,6 @@ public class ArrayStorage extends AbstractArrayStorage {
         } else {
             System.out.println("ERROR: Resume uuid=" + resume.getUuid() + " doesn't exist");
         }
-    }
-
-    public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index != NOT_FOUND) {
-            return storage[index];
-        }
-        System.out.println("ERROR: Resume uuid=" + uuid + " doesn't exist");
-        return null;
     }
 
     public void delete(String uuid) {
