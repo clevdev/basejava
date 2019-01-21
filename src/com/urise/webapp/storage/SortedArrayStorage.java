@@ -1,6 +1,7 @@
 package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
+
 import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
@@ -22,8 +23,9 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (index < 0) {
-            System.arraycopy(storage, (-index) - 1, storage, (-index), size - ((-index) - 1));
-            storage[(-index) - 1] = resume;
+            int indexToInsert = (-index) - 1;
+            System.arraycopy(storage, indexToInsert, storage, indexToInsert + 1, size - indexToInsert);
+            storage[indexToInsert] = resume;
             size++;
         }
     }
