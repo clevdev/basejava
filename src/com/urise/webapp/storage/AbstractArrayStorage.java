@@ -1,7 +1,6 @@
 package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
-
 import java.util.Arrays;
 
 public abstract class AbstractArrayStorage implements Storage {
@@ -29,7 +28,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
-        if (index < 0) {
+        if (!isMember(index)) {
             if (size < STORAGE_LIMIT) {
                 insert(resume, index);
             } else {
@@ -42,7 +41,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public void delete(String uuid) {
         int index = getIndex(uuid);
-        if (index >= 0) {
+        if (isMember(index)) {
             deleteByIndex(index);
         } else {
             System.out.println("ERROR: Operation interrupted. Resume uuid=" + uuid + " doesn't exist");
@@ -55,7 +54,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public Resume get(String uuid) {
         int index = getIndex(uuid);
-        if (index >= 0) {
+        if (isMember(index)) {
             return storage[index];
         }
         System.out.println("ERROR: Resume uuid=" + uuid + " doesn't exist");
