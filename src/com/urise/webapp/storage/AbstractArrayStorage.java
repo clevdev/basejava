@@ -63,8 +63,11 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     protected abstract int getIndex(String uuid);
+
     protected abstract void insert(Resume resume, int index);
+
     protected abstract void deleteByIndex(int index);
+
     protected abstract boolean isMember(int index);
 
 }
