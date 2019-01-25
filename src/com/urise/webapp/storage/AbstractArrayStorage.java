@@ -48,6 +48,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(uuid);
         if (isMember(index)) {
             deleteByIndex(index);
+            storage[size - 1] = null;
             size--;
         } else {
             System.out.println("ERROR: Operation interrupted. Resume uuid=" + uuid + " doesn't exist");
