@@ -56,7 +56,7 @@ public abstract class AbstractArrayStorage implements Storage {
             size--;
         } else {
             System.out.println("ERROR: Operation interrupted. Resume uuid=" + uuid + " doesn't exist");
-            throw new NotExistStorageException(uuid);
+            //throw new NotExistStorageException(uuid);
         }
     }
 
