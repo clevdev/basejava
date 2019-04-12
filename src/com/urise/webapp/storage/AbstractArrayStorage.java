@@ -1,8 +1,10 @@
 package com.urise.webapp.storage;
 
+import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
+
 import java.util.Arrays;
 
 public abstract class AbstractArrayStorage implements Storage {
@@ -44,6 +46,7 @@ public abstract class AbstractArrayStorage implements Storage {
             }
         } else {
             System.out.println("ERROR: Resume uuid=" + resume.getUuid() + " already exist");
+            throw new ExistStorageException(resume.getUuid());
         }
     }
 
@@ -56,7 +59,7 @@ public abstract class AbstractArrayStorage implements Storage {
             size--;
         } else {
             System.out.println("ERROR: Operation interrupted. Resume uuid=" + uuid + " doesn't exist");
-            //throw new NotExistStorageException(uuid);
+            throw new NotExistStorageException(uuid);
         }
     }
 
