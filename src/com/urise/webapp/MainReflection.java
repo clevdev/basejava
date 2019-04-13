@@ -14,12 +14,12 @@ public class MainReflection {
         field.setAccessible(true);
         System.out.println(field.getName());
         System.out.println(field.get(resume));
-        field.set(resume,"new_uuid");
+        field.set(resume, "new_uuid");
         System.out.println(resume);
 
         //invoke toString
 
-        Method method = resume.getClass().getDeclaredMethod("toString",null);
+        Method method = resume.getClass().getDeclaredMethod("toString", null);
         System.out.println(method.getName());
         System.out.println(method.invoke(resume));
     }
