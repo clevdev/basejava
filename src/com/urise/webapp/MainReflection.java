@@ -19,7 +19,7 @@ public class MainReflection {
 
         //invoke toString
 
-        Method method = resume.getClass().getDeclaredMethod("toString", null);
+        Method method = resume.getClass().getDeclaredMethod("toString");
         System.out.println(method.getName());
         System.out.println(method.invoke(resume));
     }
