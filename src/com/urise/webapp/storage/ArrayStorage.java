@@ -7,7 +7,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     private static final int NOT_FOUND = -1;
 
     @Override
-    protected void insert(Resume resume, int index) {
+    protected void insertElement(Resume resume, int index) {
         storage[size] = resume;
     }
 
@@ -17,7 +17,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected int getIndex(String uuid) {
+    protected Integer getKeyOfElement(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
@@ -26,8 +26,4 @@ public class ArrayStorage extends AbstractArrayStorage {
         return NOT_FOUND;
     }
 
-    @Override
-    protected boolean isMember(int index){
-        return index != NOT_FOUND;
-    }
 }
