@@ -42,13 +42,23 @@ public abstract class AbstractStorage implements Storage {
     @Override
     public Resume get(String uuid) {
         Object key = getKeyOfElement(uuid);
-        return getElementByKey(key);
+        if (isMember(key)) {
+            return getElementByKey(key);
+        } else {
+            throw new NotExistStorageException(uuid);
+        }
+
     }
 
     @Override
     public void delete(String uuid) {
         Object key = getKeyOfElement(uuid);
-        deleteElementByKey(key);
+        if (isMember(key)) {
+            deleteElementByKey(key);
+        } else {
+            throw new NotExistStorageException(uuid);
+        }
+
     }
 
 }

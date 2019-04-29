@@ -38,11 +38,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public void deleteElementByKey(Object index){
+    public void deleteElementByKey(Object index) {
 
-            deleteByIndex((Integer) index);
-            storage[size - 1] = null;
-            size--;
+        deleteByIndex((Integer) index);
+        storage[size - 1] = null;
+        size--;
     }
 
     @Override
@@ -53,12 +53,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     @Override
     public Resume getElementByKey(Object index) {
 
-            return storage[(Integer) index];
+        return storage[(Integer) index];
     }
 
     @Override
     protected boolean isMember(Object index) {
-        return (Integer) index >=0;
+        return (Integer) index >= 0;
     }
 
     protected abstract Object getKeyOfElement(String uuid);
@@ -66,7 +66,5 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected abstract void insertElement(Resume resume, int index);
 
     protected abstract void deleteByIndex(int index);
-
-
 
 }

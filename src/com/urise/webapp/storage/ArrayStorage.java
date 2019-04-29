@@ -8,7 +8,12 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected void insertElement(Resume resume, int index) {
-        storage[size] = resume;
+        if (isMember(index)) {
+            storage[index] = resume;
+        } else {
+            storage[size] = resume;
+        }
+
     }
 
     @Override
