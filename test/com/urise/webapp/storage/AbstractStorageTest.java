@@ -8,6 +8,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AbstractStorageTest {
     private Storage storage;
     private static final String UUID_1 = "uuid1";
@@ -96,6 +99,18 @@ public class AbstractStorageTest {
     public void getAll() {
         Assert.assertEquals(3, storage.getAll().length);
         Assert.assertArrayEquals(new Resume[]{RESUME_1, RESUME_2, RESUME_3}, storage.getAll());
+    }
+
+    @Test
+    public void getAllForMap() {
+        Assert.assertEquals(3, storage.getAll().length);
+
+        Map<String, Resume> expected = new HashMap<>();
+        expected.put(UUID_1, RESUME_1);
+        expected.put(UUID_2, RESUME_2);
+        expected.put(UUID_3, RESUME_3);
+
+        Assert.assertArrayEquals(expected.values().toArray(new Resume[expected.values().size()]), storage.getAll());
     }
 
     @Test
