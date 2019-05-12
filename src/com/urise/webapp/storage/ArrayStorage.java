@@ -6,6 +6,14 @@ import com.urise.webapp.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
     private static final int NOT_FOUND = -1;
 
+//    @Override
+//    public List<Resume> getAllSorted() {
+//        Resume[] sortedArray = new Resume[this.size()];
+//        System.arraycopy(storage,0,sortedArray,0,this.size());
+//        Arrays.sort(sortedArray, RESUME_COMPARATOR);
+//        return Arrays.asList(sortedArray);
+//    }
+
     @Override
     protected void insertElement(Resume resume, int index) {
         if (isMember(index)) {
