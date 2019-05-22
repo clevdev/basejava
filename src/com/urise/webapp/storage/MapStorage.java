@@ -21,7 +21,6 @@ public class MapStorage extends AbstractStorage {
     @Override
     protected void saveElement(Resume resume, Object key) {
         storage.put((String) key, resume);
-
     }
 
     @Override
@@ -32,7 +31,6 @@ public class MapStorage extends AbstractStorage {
     @Override
     protected void updateElement(Resume resume, Object key) {
         saveElement(resume, key);
-
     }
 
     @Override
@@ -41,16 +39,15 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    public void clear() {
-        storage.clear();
-    }
-
-    @Override
-    public List<Resume> getAllSorted() {
+    protected List<Resume> getSortedList() {
         List<Resume> sortedlist = new ArrayList<Resume>(storage.values());
         Collections.sort(sortedlist, RESUME_COMPARATOR);
         return sortedlist;
+    }
 
+    @Override
+    public void clear() {
+        storage.clear();
     }
 
 

@@ -8,13 +8,13 @@ public class MainTestSortedArrayStorage {
     static final Storage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
-        Resume r1 = new Resume();
+        Resume r1 = new Resume("Иванов");
         r1.setUuid("uuid1");
-        Resume r2 = new Resume();
+        Resume r2 = new Resume("Петров");
         r2.setUuid("uuid2");
-        Resume r3 = new Resume();
+        Resume r3 = new Resume("Панов");
         r3.setUuid("uuid3");
-        Resume r4 = new Resume();
+        Resume r4 = new Resume("Сидоров");
         r4.setUuid("uuid4");
 
         ARRAY_STORAGE.save(r4);

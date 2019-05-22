@@ -83,12 +83,12 @@ public class AbstractStorageTest {
         storage.clear();
         try {
             for (int n = 1; n <= AbstractArrayStorage.STORAGE_LIMIT; n++) {
-                storage.save(new Resume());
+                storage.save(new Resume("test name"));
             }
         } catch (StorageException e) {
             fail("Storage overflow");
         }
-        storage.save(new Resume());
+        storage.save(new Resume("last name"));
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -106,7 +106,7 @@ public class AbstractStorageTest {
     @Test
     public void getAllSorted() {
         List<Resume> resumeList = storage.getAllSorted();
-        Assert.assertEquals(FULLNAME_1,resumeList.get(0).getFullName());
+        Assert.assertEquals(FULLNAME_1, resumeList.get(0).getFullName());
         Assert.assertEquals(FULLNAME_2, resumeList.get(1).getFullName());
         Assert.assertEquals(FULLNAME_3, resumeList.get(2).getFullName());
     }

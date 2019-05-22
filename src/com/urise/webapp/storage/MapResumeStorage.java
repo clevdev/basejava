@@ -9,8 +9,8 @@ public class MapResumeStorage extends AbstractStorage {
     private Map<String, Resume> storage = new HashMap<>();
 
     @Override
-    protected boolean isMember(Object key) {
-        return key != null;
+    protected boolean isMember(Object resume) {
+        return resume != null;
     }
 
     @Override
@@ -20,19 +20,17 @@ public class MapResumeStorage extends AbstractStorage {
 
     @Override
     protected void saveElement(Resume resume, Object key) {
-        storage.put(((Resume) key).getUuid(), resume);
-
+        storage.put(resume.getUuid(), resume);
     }
 
     @Override
     protected Resume getElementByKey(Object key) {
-        return (Resume)key;
+        return (Resume) key;
     }
 
     @Override
     protected void updateElement(Resume resume, Object key) {
-        saveElement(resume, ((Resume)key).getUuid());
-
+        saveElement(resume, ((Resume) key).getUuid());
     }
 
     @Override
@@ -41,16 +39,15 @@ public class MapResumeStorage extends AbstractStorage {
     }
 
     @Override
-    public void clear() {
-        storage.clear();
-    }
-
-    @Override
-    public List<Resume> getAllSorted() {
+    protected List<Resume> getSortedList() {
         List<Resume> sortedlist = new ArrayList<Resume>(storage.values());
         Collections.sort(sortedlist, RESUME_COMPARATOR);
         return sortedlist;
+    }
 
+    @Override
+    public void clear() {
+        storage.clear();
     }
 
     @Override

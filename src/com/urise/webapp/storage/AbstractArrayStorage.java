@@ -4,12 +4,17 @@ import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int STORAGE_LIMIT = 10_000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
+
+    protected abstract void insertElement(Resume resume, int index);
+
+    protected abstract void deleteByIndex(int index);
 
     @Override
     public void clear() {
@@ -23,21 +28,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public List<Resume> getAllSorted() {
-        Resume[] sortedArray = new Resume[this.size()];
-        System.arraycopy(storage,0,sortedArray,0,this.size());
-        Arrays.sort(sortedArray, RESUME_COMPARATOR);
-        return Arrays.asList(sortedArray);
-    }
-
-    @Override
     public void updateElement(Resume resume, Object index) {
         storage[(Integer) index] = resume;
     }
 
     @Override
     public void saveElement(Resume resume, Object index) {
-
         if (size < STORAGE_LIMIT) {
             insertElement(resume, (Integer) index);
             size++;
@@ -48,7 +44,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     public void deleteElementByKey(Object index) {
-
         deleteByIndex((Integer) index);
         storage[size - 1] = null;
         size--;
@@ -56,7 +51,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     public Resume getElementByKey(Object index) {
-
         return storage[(Integer) index];
     }
 
@@ -65,10 +59,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return (Integer) index >= 0;
     }
 
-    protected abstract Object getKeyOfElement(String uuid);
-
-    protected abstract void insertElement(Resume resume, int index);
-
-    protected abstract void deleteByIndex(int index);
+    @Override
+    protected List<Resume> getSortedList() {
+        List resumeList = Arrays.asList(Arrays.copyOfRange(storage, 0, this.size));
+        Collections.sort(resumeList, RESUME_COMPARATOR);
+        return resumeList;
+    }
 
 }

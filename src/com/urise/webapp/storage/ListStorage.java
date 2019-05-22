@@ -7,12 +7,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage {
-
+    private static final int NOT_FOUND = -1;
     private List<Resume> storage = new ArrayList<>();
 
     @Override
     protected boolean isMember(Object key) {
-        return key != null;
+        return (Integer) key >= 0;
     }
 
     @Override
@@ -22,13 +22,12 @@ public class ListStorage extends AbstractStorage {
                 return i;
             }
         }
-        return null;
+        return NOT_FOUND;
     }
 
     @Override
     protected void saveElement(Resume resume, Object key) {
         storage.add(resume);
-
     }
 
     @Override
@@ -39,7 +38,6 @@ public class ListStorage extends AbstractStorage {
     @Override
     protected void updateElement(Resume resume, Object key) {
         storage.set((Integer) key, resume);
-
     }
 
     @Override
@@ -48,16 +46,15 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public void clear() {
-        storage.clear();
-    }
-
-    @Override
-    public List<Resume> getAllSorted() {
+    protected List<Resume> getSortedList() {
         List<Resume> sortedlist = new ArrayList<Resume>(storage);
         Collections.sort(sortedlist, RESUME_COMPARATOR);
         return sortedlist;
+    }
 
+    @Override
+    public void clear() {
+        storage.clear();
     }
 
     @Override
