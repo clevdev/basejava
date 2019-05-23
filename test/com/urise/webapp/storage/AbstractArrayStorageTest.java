@@ -15,10 +15,9 @@ public class AbstractArrayStorageTest extends AbstractStorageTest {
 
     @Test(expected = StorageException.class)
     public void saveOverflow() throws Exception {
-        assumeTrue(storage.getClass().getName().equals(ArrayStorage.class.getName()) || storage.getClass().getName().equals(SortedArrayStorage.class.getName()));
         storage.clear();
         try {
-            for (int n = 1; n <= AbstractArrayStorage.STORAGE_LIMIT; n++) {
+            for (int n = 0; n < AbstractArrayStorage.STORAGE_LIMIT; n++) {
                 storage.save(new Resume("test name"));
             }
         } catch (StorageException e) {
