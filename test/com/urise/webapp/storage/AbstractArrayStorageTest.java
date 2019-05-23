@@ -5,7 +5,6 @@ import com.urise.webapp.model.Resume;
 import org.junit.Test;
 
 import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeTrue;
 
 public class AbstractArrayStorageTest extends AbstractStorageTest {
 
@@ -17,7 +16,7 @@ public class AbstractArrayStorageTest extends AbstractStorageTest {
     public void saveOverflow() throws Exception {
         storage.clear();
         try {
-            for (int n = 0; n < AbstractArrayStorage.STORAGE_LIMIT; n++) {
+            for (int i = 0; i < AbstractArrayStorage.STORAGE_LIMIT; i++) {
                 storage.save(new Resume("test name"));
             }
         } catch (StorageException e) {
