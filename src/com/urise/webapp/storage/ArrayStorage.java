@@ -4,15 +4,11 @@ import com.urise.webapp.model.Resume;
 
 
 public class ArrayStorage extends AbstractArrayStorage {
+    private static final int NOT_FOUND = -1;
 
     @Override
     protected void insertElement(Resume resume, int index) {
-        if (index >= 0) {
-            storage[index] = resume;
-        } else {
-            storage[size] = resume;
-        }
-
+        storage[index] = resume;
     }
 
     @Override
@@ -27,7 +23,7 @@ public class ArrayStorage extends AbstractArrayStorage {
                 return i;
             }
         }
-        return -1;
+        return NOT_FOUND;
     }
 
 }

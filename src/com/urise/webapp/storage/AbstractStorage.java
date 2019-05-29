@@ -4,77 +4,77 @@ import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 
 public abstract class AbstractStorage implements Storage {
 
-    protected abstract boolean isMember(Object searchKey);
+    protected abstract boolean isMember(Object key);
 
     protected abstract Object getKeyOfElement(String uuid);
 
-    protected abstract void saveElement(Resume resume, Object searchKey);
+    protected abstract void saveElement(Resume resume, Object key);
 
     protected abstract Resume getElementByKey(Object key);
 
-    protected abstract void updateElement(Resume resume, Object searchKey);
+    protected abstract void updateElement(Resume resume, Object key);
 
-    protected abstract void deleteElementByKey(Object SearchKey);
+    protected abstract void deleteElementByKey(Object key);
 
-    protected abstract List<Resume> getListOfResumes();
+    protected abstract List<Resume> getSortedList();
 
-    protected final Comparator<Resume> RESUME_COMPARATOR = Comparator.comparing(Resume::getFullName)
-            .thenComparing(Resume::getUuid);
+    protected final Comparator<Resume> RESUME_COMPARATOR = (resume1, resume2) -> {
+        if (resume1.getFullName().equals(resume2.getFullName())) {
+            return resume1.getUuid().compareTo(resume2.getUuid());
+        } else {
+            return resume1.getFullName().compareTo(resume2.getFullName());
+        }
+    };
 
     @Override
     public void update(Resume resume) {
-        Object searchKey = getExistSearchKey(resume.getUuid());
-        updateElement(resume, searchKey);
+        Object key = getKeyOfElement(resume.getUuid());
+        if (isMember(key)) {
+            updateElement(resume, key);
+        } else {
+            throw new NotExistStorageException(resume.getUuid());
+        }
     }
 
     @Override
     public void save(Resume resume) {
-        Object searchKey = getNotExistSearchKey(resume.getUuid());
-        saveElement(resume, searchKey);
+        Object key = getKeyOfElement(resume.getUuid());
+        if (!isMember(key)) {
+            saveElement(resume, key);
+        } else {
+            throw new ExistStorageException(resume.getUuid());
+        }
     }
 
     @Override
     public Resume get(String uuid) {
-        Object searchKey = getExistSearchKey(uuid);
-        return getElementByKey(searchKey);
-    }
-
-    @Override
-    public void delete(String uuid) {
-        Object searchKey = getExistSearchKey(uuid);
-        deleteElementByKey(searchKey);
-    }
-
-    @Override
-    public List<Resume> getAllSorted() {
-        List<Resume> resumeList = getListOfResumes();
-        Collections.sort(resumeList, RESUME_COMPARATOR);
-        return resumeList;
-    }
-
-    private Object getExistSearchKey(String uuid) {
-        Object searchKey = getKeyOfElement(uuid);
-        if (isMember(searchKey)) {
-            return searchKey;
+        Object key = getKeyOfElement(uuid);
+        if (isMember(key)) {
+            return getElementByKey(key);
         } else {
             throw new NotExistStorageException(uuid);
         }
     }
 
-    private Object getNotExistSearchKey(String uuid) {
-        Object searchKey = getKeyOfElement(uuid);
-        if (!isMember(searchKey)) {
-            return searchKey;
+    @Override
+    public void delete(String uuid) {
+        Object key = getKeyOfElement(uuid);
+        if (isMember(key)) {
+            deleteElementByKey(key);
         } else {
-            throw new ExistStorageException(uuid);
+            throw new NotExistStorageException(uuid);
         }
+    }
+
+    @Override
+    public List<Resume> getAllSorted() {
+        return getSortedList();
     }
 
 }
