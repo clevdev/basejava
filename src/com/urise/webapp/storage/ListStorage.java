@@ -3,16 +3,15 @@ package com.urise.webapp.storage;
 import com.urise.webapp.model.Resume;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage {
-
+    private static final int NOT_FOUND = -1;
     private List<Resume> storage = new ArrayList<>();
 
     @Override
-    protected boolean isMember(Object key) {
-        return key != null;
+    protected boolean isMember(Object searchKey) {
+        return (Integer) searchKey >= 0;
     }
 
     @Override
@@ -22,11 +21,11 @@ public class ListStorage extends AbstractStorage {
                 return i;
             }
         }
-        return null;
+        return NOT_FOUND;
     }
 
     @Override
-    protected void saveElement(Resume resume, Object key) {
+    protected void saveElement(Resume resume, Object searchKey) {
         storage.add(resume);
     }
 
@@ -36,20 +35,18 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void updateElement(Resume resume, Object key) {
-        storage.set((Integer) key, resume);
+    protected void updateElement(Resume resume, Object searchKey) {
+        storage.set((Integer) searchKey, resume);
     }
 
     @Override
-    protected void deleteElementByKey(Object key) {
-        storage.remove(((Integer) key).intValue());
+    protected void deleteElementByKey(Object SearchKey) {
+        storage.remove(((Integer) SearchKey).intValue());
     }
 
     @Override
-    protected List<Resume> getSortedList() {
-        List<Resume> sortedlist = new ArrayList<Resume>(storage);
-        Collections.sort(sortedlist, RESUME_COMPARATOR);
-        return sortedlist;
+    protected List<Resume> getListOfResumes() {
+        return new ArrayList<Resume>(storage);
     }
 
     @Override

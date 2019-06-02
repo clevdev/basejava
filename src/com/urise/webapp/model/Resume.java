@@ -1,5 +1,6 @@
 package com.urise.webapp.model;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -20,6 +21,8 @@ public class Resume {
     }
 
     public Resume(String uuid, String fullName) {
+        Objects.requireNonNull(uuid, "uuid must be not null");
+        Objects.requireNonNull(fullName, "fullName must be not null");
         this.uuid = uuid;
         this.fullName = fullName;
     }
@@ -50,12 +53,12 @@ public class Resume {
 
     @Override
     public int hashCode() {
-        return uuid.hashCode() + ((fullName == null) ? 0 : fullName.hashCode());
+        return 31 * uuid.hashCode() + ((fullName == null) ? 0 : fullName.hashCode());
     }
 
     @Override
     public String toString() {
-        return uuid;
+        return uuid + "(" + fullName + ")";
     }
 
 }

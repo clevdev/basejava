@@ -2,15 +2,18 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MapStorage extends AbstractStorage {
 
     private Map<String, Resume> storage = new HashMap<>();
 
     @Override
-    protected boolean isMember(Object key) {
-        return storage.containsKey(key);
+    protected boolean isMember(Object searchKey) {
+        return storage.containsKey(searchKey);
     }
 
     @Override
@@ -19,8 +22,8 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void saveElement(Resume resume, Object key) {
-        storage.put((String) key, resume);
+    protected void saveElement(Resume resume, Object searchKey) {
+        storage.put((String) searchKey, resume);
     }
 
     @Override
@@ -29,20 +32,18 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void updateElement(Resume resume, Object key) {
-        saveElement(resume, key);
+    protected void updateElement(Resume resume, Object searchKey) {
+        saveElement(resume, searchKey);
     }
 
     @Override
-    protected void deleteElementByKey(Object key) {
-        storage.remove((String) key);
+    protected void deleteElementByKey(Object SearchKey) {
+        storage.remove((String) SearchKey);
     }
 
     @Override
-    protected List<Resume> getSortedList() {
-        List<Resume> sortedlist = new ArrayList<Resume>(storage.values());
-        Collections.sort(sortedlist, RESUME_COMPARATOR);
-        return sortedlist;
+    protected List<Resume> getListOfResumes() {
+        return new ArrayList<Resume>(storage.values());
     }
 
     @Override
