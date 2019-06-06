@@ -7,38 +7,38 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapStorage extends AbstractStorage {
+public class MapStorage extends AbstractStorage<String> {
 
     private Map<String, Resume> storage = new HashMap<>();
 
     @Override
-    protected boolean isMember(Object searchKey) {
+    protected boolean isMember(String searchKey) {
         return storage.containsKey(searchKey);
     }
 
     @Override
-    protected Object getKeyOfElement(String uuid) {
+    protected String getKeyOfElement(String uuid) {
         return uuid;
     }
 
     @Override
-    protected void saveElement(Resume resume, Object searchKey) {
-        storage.put((String) searchKey, resume);
+    protected void saveElement(Resume resume, String searchKey) {
+        storage.put( searchKey, resume);
     }
 
     @Override
-    protected Resume getElementByKey(Object key) {
+    protected Resume getElementByKey(String key) {
         return storage.get(key);
     }
 
     @Override
-    protected void updateElement(Resume resume, Object searchKey) {
+    protected void updateElement(Resume resume, String searchKey) {
         saveElement(resume, searchKey);
     }
 
     @Override
-    protected void deleteElementByKey(Object SearchKey) {
-        storage.remove((String) SearchKey);
+    protected void deleteElementByKey(String SearchKey) {
+        storage.remove( SearchKey);
     }
 
     @Override
