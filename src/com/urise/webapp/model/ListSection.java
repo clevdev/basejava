@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ListSection<V> extends AbstractSection {
+public class ListSection<E> extends AbstractSection {
 
-    private List<V> textList;
+    private List<E> textList;
 
-    public ListSection(List<V> list) {
+    public ListSection(List<E> list) {
         this.textList = new ArrayList<>(list);
     }
 
-    public List<V> getTextList() {
+    public List<E> getTextList() {
         return textList;
     }
 

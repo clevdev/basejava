@@ -1,17 +1,19 @@
 package com.urise.webapp.model;
 
 import java.util.Arrays;
+import java.util.Objects;
 
-public class EducationCourse {
+public class EducationCourses {
     private WebLink companyName;
     private Course courses[];
 
-    public EducationCourse(EducationCourse educationItem) {
-        this.companyName = educationItem.companyName;
-        this.courses = educationItem.courses;
+    public EducationCourses(EducationCourses educationItem) {
+        this(educationItem.companyName,educationItem.courses);
     }
 
-    public EducationCourse(WebLink companyName, Course courses[]) {
+    public EducationCourses(WebLink companyName, Course courses[]) {
+        Objects.requireNonNull(companyName, "companyName must be not null");
+        Objects.requireNonNull(courses, "courses must be not null");
         this.companyName = companyName;
         this.courses = courses;
     }
@@ -21,7 +23,7 @@ public class EducationCourse {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        EducationCourse that = (EducationCourse) o;
+        EducationCourses that = (EducationCourses) o;
 
         if (!companyName.equals(that.companyName)) return false;
         // Probably incorrect - comparing Object[] arrays with Arrays.equals
@@ -37,7 +39,7 @@ public class EducationCourse {
 
     @Override
     public String toString() {
-        return "EducationCourse{" +
+        return "EducationCourses{" +
                 "companyName=" + companyName +
                 ", courses=" + Arrays.toString(courses) +
                 '}';

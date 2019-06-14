@@ -1,11 +1,15 @@
 package com.urise.webapp.model;
 
+import java.util.Objects;
+
 public class WebLink {
 
     private String caption;
     private String link;
 
     public WebLink(String caption, String link) {
+        Objects.requireNonNull(caption, "caption must be not null");
+        Objects.requireNonNull(link, "link must be not null");
         this.caption = caption;
         this.link = link;
     }

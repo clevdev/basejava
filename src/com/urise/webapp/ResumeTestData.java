@@ -31,25 +31,25 @@ public class ResumeTestData {
 
         resume.setSections(SectionType.ACHIEVEMENT, achievSections);
 
-        ListSection<EducationCourse> educationListSection =
+        ListSection<EducationCourses> educationListSection =
                 new ListSection<>(Arrays.asList(
-                        new EducationCourse(
+                        new EducationCourses(
                                 new WebLink("Coursera", "https://www.coursera.org/learn/progfun1"),
                                 new Course[]{new Course("03/2013 - 05/2013", "Functional Programming Principles in Scala\" by Martin Odersky")}),
-                        new EducationCourse(
+                        new EducationCourses(
                                 new WebLink("Luxoft", "https://www.luxoft-training.ru/kurs/obektno-orientirovannyy__analiz_is_kontseptualnoe_modelirovanie_na_uml_dlya_sistemnyh_analitikov_.html"),
                                 new Course[]{new Course("03/2011 - 04/2011", "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\"")}),
-                        new EducationCourse(
+                        new EducationCourses(
                                 new WebLink("Siemens AG", "https://new.siemens.com"),
                                 new Course[]{new Course("01/2005 - 04/2005", "3 месяца обучения мобильным IN сетям (Берлин)")}),
-                        new EducationCourse(
+                        new EducationCourses(
                                 new WebLink("Alcatel", "http://www.alcatel.ru/"),
                                 new Course[]{new Course("09/1997 - 03/1998", "6 месяцев обучения цифровым телефонным сетям (Москва)")}),
-                        new EducationCourse(
+                        new EducationCourses(
                                 new WebLink("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики", "http://www.ifmo.ru/ru/"),
                                 new Course[]{new Course("09/1993 - 07/1996", "Аспирантура (программист С, С++)"),
                                         new Course("09/1987 - 07/1993", "Инженер (программист Fortran, C)")}),
-                        new EducationCourse(
+                        new EducationCourses(
                                 new WebLink("Заочная физико-техническая школа при МФТИ", "http://www.school.mipt.ru/"),
                                 new Course[]{new Course("09/1984 - 06/1987", "6 месяцев обучения цифровым телефонным сетям (Москва)")})
 

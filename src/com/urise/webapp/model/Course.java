@@ -1,11 +1,15 @@
 package com.urise.webapp.model;
 
+import java.util.Objects;
+
 public class Course {
 
     private String period;
     private String description;
 
     public Course(String period, String description) {
+        Objects.requireNonNull(period, "period must be not null");
+        Objects.requireNonNull(description, "description must be not null");
         this.period = period;
         this.description = description;
     }
