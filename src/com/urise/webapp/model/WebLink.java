@@ -9,7 +9,6 @@ public class WebLink {
 
     public WebLink(String caption, String link) {
         Objects.requireNonNull(caption, "caption must be not null");
-        Objects.requireNonNull(link, "link must be not null");
         this.caption = caption;
         this.link = link;
     }
